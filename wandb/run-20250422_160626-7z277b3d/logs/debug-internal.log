@@ -1,8 +1,0 @@
-{"time":"2025-04-22T16:06:26.803641203+10:00","level":"INFO","msg":"stream: starting","core version":"0.19.9","symlink path":"/mnt/hpccs01/home/raines/DGS-CodefromHPC/22-04-25/wandb/run-20250422_160626-7z277b3d/logs/debug-core.log"}
-{"time":"2025-04-22T16:06:27.189571764+10:00","level":"INFO","msg":"created new stream","id":"7z277b3d"}
-{"time":"2025-04-22T16:06:27.189620466+10:00","level":"INFO","msg":"stream: started","id":"7z277b3d"}
-{"time":"2025-04-22T16:06:27.189633204+10:00","level":"INFO","msg":"handler: started","stream_id":"7z277b3d"}
-{"time":"2025-04-22T16:06:27.189679965+10:00","level":"INFO","msg":"sender: started","stream_id":"7z277b3d"}
-{"time":"2025-04-22T16:06:27.18970078+10:00","level":"INFO","msg":"writer: Do: started","stream_id":"7z277b3d"}
-{"time":"2025-04-22T16:06:27.518220504+10:00","level":"INFO","msg":"Starting system monitor"}
-{"time":"2025-04-22T21:50:37.975348861+10:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/sgraine/DGS-April/7z277b3d/file_stream\": dial tcp 35.186.228.49:443: connect: connection timed out"}
