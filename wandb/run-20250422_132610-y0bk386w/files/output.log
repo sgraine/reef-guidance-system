@@ -1,0 +1,10 @@
+/mnt/hpccs01/home/raines/n9766804/envs/wacv_env_2/lib/python3.10/site-packages/torch/cuda/__init__.py:146: UserWarning:
+NVIDIA H100 80GB HBM3 with CUDA capability sm_90 is not compatible with the current PyTorch installation.
+The current PyTorch install supports CUDA capabilities sm_37 sm_50 sm_60 sm_61 sm_70 sm_75 sm_80 sm_86 compute_37.
+If you want to use the NVIDIA H100 80GB HBM3 GPU with PyTorch, please check the instructions at https://pytorch.org/get-started/locally/
+  warnings.warn(incompatible_device_warn.format(device_name, capability, " ".join(arch_list), device_name))
+  0%|          | 0/75 [00:00<?, ?it/s]
+################################# MODEL NAME: ########################################
+model-1745293341
+Epoch 0/9999
+----------

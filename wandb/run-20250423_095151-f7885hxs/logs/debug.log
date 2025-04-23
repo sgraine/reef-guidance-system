@@ -1,0 +1,27 @@
+2025-04-23 09:51:51,358 INFO    MainThread:3601716 [wandb_setup.py:_flush():67] Current SDK version is 0.19.9
+2025-04-23 09:51:51,359 INFO    MainThread:3601716 [wandb_setup.py:_flush():67] Configure stats pid to 3601716
+2025-04-23 09:51:51,359 INFO    MainThread:3601716 [wandb_setup.py:_flush():67] Loading settings from /home/raines/.config/wandb/settings
+2025-04-23 09:51:51,359 INFO    MainThread:3601716 [wandb_setup.py:_flush():67] Loading settings from /mnt/hpccs01/home/raines/DGS-CodefromHPC/22-04-25/wandb/settings
+2025-04-23 09:51:51,359 INFO    MainThread:3601716 [wandb_setup.py:_flush():67] Loading settings from environment variables
+2025-04-23 09:51:51,359 INFO    MainThread:3601716 [wandb_init.py:setup_run_log_directory():662] Logging user logs to /mnt/hpccs01/home/raines/DGS-CodefromHPC/22-04-25/wandb/run-20250423_095151-f7885hxs/logs/debug.log
+2025-04-23 09:51:51,359 INFO    MainThread:3601716 [wandb_init.py:setup_run_log_directory():663] Logging internal logs to /mnt/hpccs01/home/raines/DGS-CodefromHPC/22-04-25/wandb/run-20250423_095151-f7885hxs/logs/debug-internal.log
+2025-04-23 09:51:51,359 INFO    MainThread:3601716 [wandb_init.py:init():781] calling init triggers
+2025-04-23 09:51:51,359 INFO    MainThread:3601716 [wandb_init.py:init():786] wandb.init called with sweep_config: {}
+config: {'_wandb': {}}
+2025-04-23 09:51:51,359 INFO    MainThread:3601716 [wandb_init.py:init():809] starting backend
+2025-04-23 09:51:51,359 INFO    MainThread:3601716 [wandb_init.py:init():813] sending inform_init request
+2025-04-23 09:51:51,365 INFO    MainThread:3601716 [backend.py:_multiprocessing_setup():101] multiprocessing start_methods=fork,spawn,forkserver, using: spawn
+2025-04-23 09:51:51,365 INFO    MainThread:3601716 [wandb_init.py:init():823] backend started and connected
+2025-04-23 09:51:51,366 INFO    MainThread:3601716 [wandb_init.py:init():915] updated telemetry
+2025-04-23 09:51:51,367 INFO    MainThread:3601716 [wandb_init.py:init():939] communicating run to backend with 90.0 second timeout
+2025-04-23 09:51:52,077 INFO    MainThread:3601716 [wandb_init.py:init():1014] starting run threads in backend
+2025-04-23 09:51:55,274 INFO    MainThread:3601716 [wandb_run.py:_console_start():2454] atexit reg
+2025-04-23 09:51:55,274 INFO    MainThread:3601716 [wandb_run.py:_redirect():2306] redirect: wrap_raw
+2025-04-23 09:51:55,274 INFO    MainThread:3601716 [wandb_run.py:_redirect():2371] Wrapping output streams.
+2025-04-23 09:51:55,274 INFO    MainThread:3601716 [wandb_run.py:_redirect():2394] Redirects installed.
+2025-04-23 09:51:55,286 INFO    MainThread:3601716 [wandb_init.py:init():1056] run started, returning control to user process
+2025-04-23 09:51:55,286 INFO    MainThread:3601716 [wandb_config.py:__setitem__():154] [no run ID] config set dataset = ../CleanData/Training - ImageWeakLabelling - <bound method Run._config_callback of <wandb.sdk.wandb_run.Run object at 0x153d3899c650>>
+2025-04-23 09:51:55,286 INFO    MainThread:3601716 [wandb_run.py:_config_callback():1327] config_cb dataset ../CleanData/Training - ImageWeakLabelling None
+2025-04-23 09:51:55,287 INFO    MainThread:3601716 [wandb_config.py:__setitem__():154] [no run ID] config set batch_size = 32 - <bound method Run._config_callback of <wandb.sdk.wandb_run.Run object at 0x153d3899c650>>
+2025-04-23 09:51:55,287 INFO    MainThread:3601716 [wandb_run.py:_config_callback():1327] config_cb batch_size 32 None
+2025-04-23 09:51:57,542 INFO    MsgRouterThr:3601716 [mailbox.py:close():129] [no run ID] Closing mailbox, abandoning 1 handles.

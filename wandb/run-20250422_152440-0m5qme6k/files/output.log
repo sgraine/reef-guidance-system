@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "/mnt/hpccs01/home/raines/DGS-CodefromHPC/22-04-25/training/train_models_patchlabels.py", line 126, in <module>
+    acc_metric_train = torchmetrics.Accuracy(num_classes = len(class_list), mdmc_average='global', task='multiclass').to(device)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/hpccs01/home/raines/DGS-CodefromHPC/22-04-25/.pixi/envs/cuda/lib/python3.12/site-packages/torchmetrics/classification/accuracy.py", line 523, in __new__
+    return MulticlassAccuracy(num_classes, top_k, average, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/hpccs01/home/raines/DGS-CodefromHPC/22-04-25/.pixi/envs/cuda/lib/python3.12/site-packages/torchmetrics/classification/stat_scores.py", line 319, in __init__
+    super(_AbstractStatScores, self).__init__(**kwargs)
+  File "/mnt/hpccs01/home/raines/DGS-CodefromHPC/22-04-25/.pixi/envs/cuda/lib/python3.12/site-packages/torchmetrics/metric.py", line 154, in __init__
+    raise ValueError(f"Unexpected keyword arguments: {', '.join(kwargs_)}")
+ValueError: Unexpected keyword arguments: `mdmc_average`

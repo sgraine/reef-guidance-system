@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/mnt/hpccs01/home/raines/DGS-CodefromHPC/22-04-25/training/train_models_imagelabels.py", line 43, in <module>
+    train_dataloader, val_dataloader = loadDataValSplit(class_list, os.path.join(dataset_path, "Combined"), batch_size, augment=augment, num_workers=1)
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/raines/DGS-CodefromHPC/22-04-25/dataloaders/dataloaders_imagelabels.py", line 162, in loadDataValSplit
+    train_dataset = ImageDataset(train_images_array, train_labels_array, train_path, num_classes=len(class_list), augment=augment, w_resize=w_resize, h_resize=h_resize)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: ImageDataset.__init__() got an unexpected keyword argument 'num_classes'

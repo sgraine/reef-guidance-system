@@ -1,0 +1,35 @@
+2025-04-22 13:18:48,220 INFO    MainThread:2404225 [wandb_setup.py:_flush():76] Current SDK version is 0.17.3
+2025-04-22 13:18:48,220 INFO    MainThread:2404225 [wandb_setup.py:_flush():76] Configure stats pid to 2404225
+2025-04-22 13:18:48,220 INFO    MainThread:2404225 [wandb_setup.py:_flush():76] Loading settings from /home/raines/.config/wandb/settings
+2025-04-22 13:18:48,220 INFO    MainThread:2404225 [wandb_setup.py:_flush():76] Loading settings from /mnt/hpccs01/home/raines/DGS-CodefromHPC/22-04-25/wandb/settings
+2025-04-22 13:18:48,220 INFO    MainThread:2404225 [wandb_setup.py:_flush():76] Loading settings from environment variables: {}
+2025-04-22 13:18:48,220 INFO    MainThread:2404225 [wandb_setup.py:_flush():76] Applying setup settings: {'_disable_service': False}
+2025-04-22 13:18:48,220 INFO    MainThread:2404225 [wandb_setup.py:_flush():76] Inferring run settings from compute environment: {'program_relpath': 'training/train_models_patchlabels.py', 'program_abspath': '/mnt/hpccs01/home/raines/DGS-CodefromHPC/22-04-25/training/train_models_patchlabels.py', 'program': '/mnt/hpccs01/home/raines/DGS-CodefromHPC/22-04-25/training/train_models_patchlabels.py'}
+2025-04-22 13:18:48,220 INFO    MainThread:2404225 [wandb_setup.py:_flush():76] Applying login settings: {}
+2025-04-22 13:18:48,220 INFO    MainThread:2404225 [wandb_init.py:_log_setup():520] Logging user logs to /mnt/hpccs01/home/raines/DGS-CodefromHPC/22-04-25/wandb/run-20250422_131848-k6qmzy07/logs/debug.log
+2025-04-22 13:18:48,220 INFO    MainThread:2404225 [wandb_init.py:_log_setup():521] Logging internal logs to /mnt/hpccs01/home/raines/DGS-CodefromHPC/22-04-25/wandb/run-20250422_131848-k6qmzy07/logs/debug-internal.log
+2025-04-22 13:18:48,220 INFO    MainThread:2404225 [wandb_init.py:init():560] calling init triggers
+2025-04-22 13:18:48,220 INFO    MainThread:2404225 [wandb_init.py:init():567] wandb.init called with sweep_config: {}
+config: {}
+2025-04-22 13:18:48,220 INFO    MainThread:2404225 [wandb_init.py:init():610] starting backend
+2025-04-22 13:18:48,220 INFO    MainThread:2404225 [wandb_init.py:init():614] setting up manager
+2025-04-22 13:18:48,221 INFO    MainThread:2404225 [backend.py:_multiprocessing_setup():105] multiprocessing start_methods=fork,spawn,forkserver, using: spawn
+2025-04-22 13:18:48,223 INFO    MainThread:2404225 [wandb_init.py:init():622] backend started and connected
+2025-04-22 13:18:48,225 INFO    MainThread:2404225 [wandb_init.py:init():711] updated telemetry
+2025-04-22 13:18:48,225 INFO    MainThread:2404225 [wandb_init.py:init():744] communicating run to backend with 90.0 second timeout
+2025-04-22 13:18:48,924 INFO    MainThread:2404225 [wandb_run.py:_on_init():2402] communicating current version
+2025-04-22 13:18:49,041 INFO    MainThread:2404225 [wandb_run.py:_on_init():2411] got version response upgrade_message: "wandb version 0.19.9 is available!  To upgrade, please run:\n $ pip install wandb --upgrade"
+
+2025-04-22 13:18:49,041 INFO    MainThread:2404225 [wandb_init.py:init():795] starting run threads in backend
+2025-04-22 13:19:06,354 INFO    MainThread:2404225 [wandb_run.py:_console_start():2380] atexit reg
+2025-04-22 13:19:06,354 INFO    MainThread:2404225 [wandb_run.py:_redirect():2235] redirect: wrap_raw
+2025-04-22 13:19:06,355 INFO    MainThread:2404225 [wandb_run.py:_redirect():2300] Wrapping output streams.
+2025-04-22 13:19:06,355 INFO    MainThread:2404225 [wandb_run.py:_redirect():2325] Redirects installed.
+2025-04-22 13:19:06,370 INFO    MainThread:2404225 [wandb_init.py:init():838] run started, returning control to user process
+2025-04-22 13:19:06,370 INFO    MainThread:2404225 [wandb_config.py:__setitem__():151] config set dataset = ../../CleanData/Training - ChatGPTLabelling/ - <bound method Run._config_callback of <wandb.sdk.wandb_run.Run object at 0x1532c5fb5990>>
+2025-04-22 13:19:06,370 INFO    MainThread:2404225 [wandb_run.py:_config_callback():1382] config_cb dataset ../../CleanData/Training - ChatGPTLabelling/ None
+2025-04-22 13:19:06,370 INFO    MainThread:2404225 [wandb_config.py:__setitem__():151] config set batch_size = 96 - <bound method Run._config_callback of <wandb.sdk.wandb_run.Run object at 0x1532c5fb5990>>
+2025-04-22 13:19:06,370 INFO    MainThread:2404225 [wandb_run.py:_config_callback():1382] config_cb batch_size 96 None
+2025-04-22 13:19:06,370 INFO    MainThread:2404225 [wandb_config.py:__setitem__():151] config set efficientnet = False - <bound method Run._config_callback of <wandb.sdk.wandb_run.Run object at 0x1532c5fb5990>>
+2025-04-22 13:19:06,370 INFO    MainThread:2404225 [wandb_run.py:_config_callback():1382] config_cb efficientnet False None
+2025-04-22 13:19:11,657 WARNING MsgRouterThr:2404225 [router.py:message_loop():77] message_loop has been closed

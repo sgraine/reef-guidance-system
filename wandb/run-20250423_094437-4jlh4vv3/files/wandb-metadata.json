@@ -1,0 +1,38 @@
+{
+  "os": "Linux-5.14.0-427.50.1.el9_4.x86_64-x86_64-with-glibc2.34",
+  "python": "CPython 3.12.10",
+  "startedAt": "2025-04-22T23:44:37.203499Z",
+  "program": "/mnt/hpccs01/home/raines/DGS-CodefromHPC/22-04-25/training/train_models_patchlabels.py",
+  "codePath": "training/train_models_patchlabels.py",
+  "email": "scarlett.g.raine@gmail.com",
+  "root": "/mnt/hpccs01/home/raines/DGS-CodefromHPC/22-04-25",
+  "host": "gpu1n003",
+  "executable": "/mnt/hpccs01/home/raines/DGS-CodefromHPC/22-04-25/.pixi/envs/cuda/bin/python",
+  "codePathLocal": "training/train_models_patchlabels.py",
+  "cpu_count": 96,
+  "cpu_count_logical": 192,
+  "gpu": "NVIDIA H100 80GB HBM3",
+  "gpu_count": 1,
+  "disk": {
+    "/": {
+      "total": "540607373312",
+      "used": "33241206784"
+    }
+  },
+  "memory": {
+    "total": "1081214750720"
+  },
+  "cpu": {
+    "count": 96,
+    "countLogical": 192
+  },
+  "gpu_nvidia": [
+    {
+      "name": "NVIDIA H100 80GB HBM3",
+      "memoryTotal": "85520809984",
+      "cudaCores": 16896,
+      "architecture": "Hopper"
+    }
+  ],
+  "cudaVersion": "12.8"
+}

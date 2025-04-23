@@ -1,0 +1,93 @@
+[project]
+name = "deployment-guidance-system"
+version = "0.1.0"
+description = "DGS Scripts"
+authors = ["Scarlett Raine <sg.raine@qut.edu.au>", "Tobias Fischer <tobias.fischer@qut.edu.au>"]
+channels = ["conda-forge"]
+platforms = ["linux-64", "osx-arm64"]
+preview = ["pixi-build"] 
+
+[system-requirements]
+linux = "4.12"
+libc = { family = "glibc", version = "2.22" }
+
+[feature.cuda]
+platforms = ["linux-64"]
+system-requirements = {cuda = "12"}
+
+[dependencies]
+python = "3.12.*"
+pip = "*"
+numpy = "<2"
+pytorch = ">=2.4"
+torchvision = "*"
+torchmetrics = "*"
+tqdm = "*"
+matplotlib = "*"
+scipy = "*"
+Pillow = ">=7.1"
+git = "*"
+natsort = "*"
+compilers = "*"
+cmake = "*"
+xformers = "*"
+pytorch-lightning = "*"
+pytorch-metric-learning = "*"
+timm = "*"
+h5py = "*"
+scikit-learn = "*"
+scikit-image = "*"
+cython = "*"
+opencv = "*"
+jupyterlab = "*"
+wandb = "*"
+ultralytics = "*"
+geopandas = "*"
+pandas = "*"
+seaborn = "*"
+imgaug = "*"
+onnxruntime = "*"
+shapely = "*"
+folium = "*"
+tiktoken = "*"
+openai = "*"
+onnx = "*"
+
+[feature.cuda.dependencies]
+cuda-version = "12.*"
+pytorch-gpu = "*"
+cuda-cudart-dev = "*"
+cuda-crt = "*"
+cudnn = "*"
+libcusparse-dev = "*"
+cuda-driver-dev = "*"
+cuda-nvcc = "*"
+cuda-nvrtc-dev = "*"
+cuda-nvtx-dev = "*"
+cuda-nvml-dev = "*"
+cuda-profiler-api = "*"
+cusparselt = "*"
+libcublas-dev = "*"
+libcudss-dev = "*"
+libcufile-dev = "*"
+libcufft-dev = "*"
+libcurand-dev = "*"
+libcusolver-dev = "*"
+
+[environments]
+cuda = ["cuda"]
+
+[tasks]
+chatgpt-label = { cmd = "python chatgpt/pseudolabel_and_eval.py" }
+train = { cmd = "python training/train_models_patchlabels.py" }
+train-images = { cmd = "python training/train_models_imagelabels.py" }
+convert-onnx = { cmd = "python training/convert_onnx.py" }
+eval-patches = { cmd = "python eval/pytorch_patch_eval.py" }
+eval-deploy = { cmd = "python eval/pytorch_patch_deployment_eval.py" }
+eval-images = { cmd = "python eval/pytorch_image_eval.py" }
+vis-onnx-gps = { cmd = "python vis/infer_onnx_save_gps.py" }
+vis-coral-gps = { cmd = "python vis/coral_gps.py" }
+calc-obs-var = { cmd = "python utils/calculate_observer_variability.py" }
+
+
+

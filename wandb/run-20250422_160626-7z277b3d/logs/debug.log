@@ -1,0 +1,34 @@
+2025-04-22 16:06:26,792 INFO    MainThread:2883773 [wandb_setup.py:_flush():67] Current SDK version is 0.19.9
+2025-04-22 16:06:26,793 INFO    MainThread:2883773 [wandb_setup.py:_flush():67] Configure stats pid to 2883773
+2025-04-22 16:06:26,793 INFO    MainThread:2883773 [wandb_setup.py:_flush():67] Loading settings from /home/raines/.config/wandb/settings
+2025-04-22 16:06:26,793 INFO    MainThread:2883773 [wandb_setup.py:_flush():67] Loading settings from /mnt/hpccs01/home/raines/DGS-CodefromHPC/22-04-25/wandb/settings
+2025-04-22 16:06:26,793 INFO    MainThread:2883773 [wandb_setup.py:_flush():67] Loading settings from environment variables
+2025-04-22 16:06:26,793 INFO    MainThread:2883773 [wandb_init.py:setup_run_log_directory():662] Logging user logs to /mnt/hpccs01/home/raines/DGS-CodefromHPC/22-04-25/wandb/run-20250422_160626-7z277b3d/logs/debug.log
+2025-04-22 16:06:26,793 INFO    MainThread:2883773 [wandb_init.py:setup_run_log_directory():663] Logging internal logs to /mnt/hpccs01/home/raines/DGS-CodefromHPC/22-04-25/wandb/run-20250422_160626-7z277b3d/logs/debug-internal.log
+2025-04-22 16:06:26,793 INFO    MainThread:2883773 [wandb_init.py:init():781] calling init triggers
+2025-04-22 16:06:26,793 INFO    MainThread:2883773 [wandb_init.py:init():786] wandb.init called with sweep_config: {}
+config: {'_wandb': {}}
+2025-04-22 16:06:26,793 INFO    MainThread:2883773 [wandb_init.py:init():809] starting backend
+2025-04-22 16:06:26,793 INFO    MainThread:2883773 [wandb_init.py:init():813] sending inform_init request
+2025-04-22 16:06:26,798 INFO    MainThread:2883773 [backend.py:_multiprocessing_setup():101] multiprocessing start_methods=fork,spawn,forkserver, using: spawn
+2025-04-22 16:06:26,798 INFO    MainThread:2883773 [wandb_init.py:init():823] backend started and connected
+2025-04-22 16:06:26,799 INFO    MainThread:2883773 [wandb_init.py:init():915] updated telemetry
+2025-04-22 16:06:26,800 INFO    MainThread:2883773 [wandb_init.py:init():939] communicating run to backend with 90.0 second timeout
+2025-04-22 16:06:27,516 INFO    MainThread:2883773 [wandb_init.py:init():1014] starting run threads in backend
+2025-04-22 16:06:27,631 INFO    MainThread:2883773 [wandb_run.py:_console_start():2454] atexit reg
+2025-04-22 16:06:27,632 INFO    MainThread:2883773 [wandb_run.py:_redirect():2306] redirect: wrap_raw
+2025-04-22 16:06:27,632 INFO    MainThread:2883773 [wandb_run.py:_redirect():2371] Wrapping output streams.
+2025-04-22 16:06:27,632 INFO    MainThread:2883773 [wandb_run.py:_redirect():2394] Redirects installed.
+2025-04-22 16:06:27,634 INFO    MainThread:2883773 [wandb_init.py:init():1056] run started, returning control to user process
+2025-04-22 16:06:27,635 INFO    MainThread:2883773 [wandb_config.py:__setitem__():154] [no run ID] config set dataset = ../CleanData/Training - ChatGPTLabelling/ - <bound method Run._config_callback of <wandb.sdk.wandb_run.Run object at 0x147164bbefc0>>
+2025-04-22 16:06:27,635 INFO    MainThread:2883773 [wandb_run.py:_config_callback():1327] config_cb dataset ../CleanData/Training - ChatGPTLabelling/ None
+2025-04-22 16:06:27,635 INFO    MainThread:2883773 [wandb_config.py:__setitem__():154] [no run ID] config set batch_size = 96 - <bound method Run._config_callback of <wandb.sdk.wandb_run.Run object at 0x147164bbefc0>>
+2025-04-22 16:06:27,635 INFO    MainThread:2883773 [wandb_run.py:_config_callback():1327] config_cb batch_size 96 None
+2025-04-22 16:06:27,635 INFO    MainThread:2883773 [wandb_config.py:__setitem__():154] [no run ID] config set efficientnet = False - <bound method Run._config_callback of <wandb.sdk.wandb_run.Run object at 0x147164bbefc0>>
+2025-04-22 16:06:27,635 INFO    MainThread:2883773 [wandb_run.py:_config_callback():1327] config_cb efficientnet False None
+2025-04-22 16:06:28,265 INFO    MainThread:2883773 [wandb_config.py:__setitem__():154] [no run ID] config set model_type = MobileNet_V3 - <bound method Run._config_callback of <wandb.sdk.wandb_run.Run object at 0x147164bbefc0>>
+2025-04-22 16:06:28,265 INFO    MainThread:2883773 [wandb_run.py:_config_callback():1327] config_cb model_type MobileNet_V3 None
+2025-04-22 16:06:28,635 INFO    MainThread:2883773 [wandb_config.py:__setitem__():154] [no run ID] config set class_weights = tensor([1.6509, 5.9775, 4.4057], device='cuda:0') - <bound method Run._config_callback of <wandb.sdk.wandb_run.Run object at 0x147164bbefc0>>
+2025-04-22 16:06:28,635 INFO    MainThread:2883773 [wandb_run.py:_config_callback():1327] config_cb class_weights tensor([1.6509, 5.9775, 4.4057], device='cuda:0') None
+2025-04-22 16:06:28,641 INFO    MainThread:2883773 [wandb_config.py:__setitem__():154] [no run ID] config set model_name = model-1745301988 - <bound method Run._config_callback of <wandb.sdk.wandb_run.Run object at 0x147164bbefc0>>
+2025-04-22 16:06:28,641 INFO    MainThread:2883773 [wandb_run.py:_config_callback():1327] config_cb model_name model-1745301988 None

@@ -1,0 +1,11 @@
+{"time":"2025-04-23T09:54:20.27904466+10:00","level":"INFO","msg":"stream: starting","core version":"0.19.9","symlink path":"/mnt/hpccs01/home/raines/DGS-CodefromHPC/22-04-25/wandb/run-20250423_095420-5rkuer7j/logs/debug-core.log"}
+{"time":"2025-04-23T09:54:20.641440854+10:00","level":"INFO","msg":"created new stream","id":"5rkuer7j"}
+{"time":"2025-04-23T09:54:20.641486357+10:00","level":"INFO","msg":"stream: started","id":"5rkuer7j"}
+{"time":"2025-04-23T09:54:20.641504666+10:00","level":"INFO","msg":"handler: started","stream_id":"5rkuer7j"}
+{"time":"2025-04-23T09:54:20.64150471+10:00","level":"INFO","msg":"writer: Do: started","stream_id":"5rkuer7j"}
+{"time":"2025-04-23T09:54:20.641535682+10:00","level":"INFO","msg":"sender: started","stream_id":"5rkuer7j"}
+{"time":"2025-04-23T09:54:20.960791886+10:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-04-23T10:33:33.506789683+10:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/sgraine/DGS-Whole-Image-April/5rkuer7j/file_stream\": dial tcp 35.186.228.49:443: connect: connection timed out"}
+{"time":"2025-04-23T10:38:03.843728437+10:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/sgraine/DGS-Whole-Image-April/5rkuer7j/file_stream\": dial tcp 35.186.228.49:443: connect: connection timed out"}
+{"time":"2025-04-23T10:54:36.082429524+10:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/graphql\": net/http: request canceled (Client.Timeout exceeded while awaiting headers)"}
+{"time":"2025-04-23T11:24:33.219885115+10:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/sgraine/DGS-Whole-Image-April/5rkuer7j/file_stream\": dial tcp 35.186.228.49:443: connect: connection timed out"}

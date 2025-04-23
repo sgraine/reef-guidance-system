@@ -1,0 +1,7 @@
+{"time":"2025-04-23T13:28:42.18669526+10:00","level":"INFO","msg":"stream: starting","core version":"0.19.9","symlink path":"/mnt/hpccs01/home/raines/DGS-CodefromHPC/22-04-25/wandb/run-20250423_132842-4r5dihjj/logs/debug-core.log"}
+{"time":"2025-04-23T13:28:42.591471458+10:00","level":"INFO","msg":"created new stream","id":"4r5dihjj"}
+{"time":"2025-04-23T13:28:42.591518851+10:00","level":"INFO","msg":"stream: started","id":"4r5dihjj"}
+{"time":"2025-04-23T13:28:42.591531962+10:00","level":"INFO","msg":"writer: Do: started","stream_id":"4r5dihjj"}
+{"time":"2025-04-23T13:28:42.591595347+10:00","level":"INFO","msg":"handler: started","stream_id":"4r5dihjj"}
+{"time":"2025-04-23T13:28:42.59153811+10:00","level":"INFO","msg":"sender: started","stream_id":"4r5dihjj"}
+{"time":"2025-04-23T13:28:42.953851373+10:00","level":"INFO","msg":"Starting system monitor"}
