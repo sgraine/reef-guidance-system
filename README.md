@@ -33,7 +33,10 @@ pixi run -e cuda [task]    # With GPU
 pixi run [task]            # CPU only
 ```
 
-The task names are in the square brackets `[task-name]` below, beside each of the scripts.  If GPU (cuda) is needed, it is indicated by the [cuda] beside the task name. If the script does not have a task name in square brackets beside it, then the script is imported by others and not directly executable.
+
+The task names are in the square brackets **[task-name]** below, beside each of the scripts.  If GPU (cuda) is needed, it is indicated by the **[cuda]** beside the task name. If the script does not have a task name in square brackets beside it, then the script is imported by others and not directly executable.
+
+
 ---
 
 ## Scripts
@@ -47,7 +50,7 @@ chatgpt/
 ```
 
 - `chatgpt_script.py` | script which initializes ChatGPT from the API and creates the necessary prompting structure
-- [chatgpt-label] `pseudolabel_and_eval.py` | script that reads in the functions from chatgpt_script, and then pseudo-labels a folder of image patches. It also calculates the metrics against provided ground truth labels for the same patches
+- **[chatgpt-label]** `pseudolabel_and_eval.py` | script that reads in the functions from chatgpt_script, and then pseudo-labels a folder of image patches. It also calculates the metrics against provided ground truth labels for the same patches
 
 ### 2. Training
 
@@ -58,9 +61,9 @@ training/
 ├── convert_onnx.py               
 ```
 
-- [cuda][train] `train_models_patchlabels.py` | script to train a classification model on a dataset labelled at the patch level
-- [cuda][train-image] `train_models_imagelabels.py` | script to train a classification model on a dataset labelled at the image level
-- [cuda][convert-onnx] `convert_onnx.py` | this script converts a pytorch model into an onnx model, useful for inference on a jetson
+- **[cuda][train]** `train_models_patchlabels.py` | script to train a classification model on a dataset labelled at the patch level
+- **[cuda][train-image]** `train_models_imagelabels.py` | script to train a classification model on a dataset labelled at the image level
+- **[cuda][convert-onnx]** `convert_onnx.py` | this script converts a pytorch model into an onnx model, useful for inference on a jetson
 
 ### 3. Dataloaders
 
@@ -82,9 +85,9 @@ eval/
 ├── pytorch_image_eval.py              
 ```
 
-- [cuda][eval-deploy] `pytorch_patch_deployment_eval.py` | evaluates a pytorch model on the whole image deployment task (classifies each patch first, then decides deploy/no-deploy using threshold
-- [cuda][eval-patches] `pytorch_patch_eval.py` | evaluates a pytorch model on a test patch dataset (where every patch has been assigned a ground truth label)
-- [cuda][eval-images] `pytorch_image_eval.py` | evaluates a pytorch model trained on whole images
+- **[cuda][eval-deploy]** `pytorch_patch_deployment_eval.py` | evaluates a pytorch model on the whole image deployment task (classifies each patch first, then decides deploy/no-deploy using threshold
+- **[cuda][eval-patches]** `pytorch_patch_eval.py` | evaluates a pytorch model on a test patch dataset (where every patch has been assigned a ground truth label)
+- **[cuda][eval-images]** `pytorch_image_eval.py` | evaluates a pytorch model trained on whole images
 
 ### 5. Visualisation
 
@@ -94,8 +97,8 @@ vis/
 ├── infer_onnx_save_gps.py        
 ```
 
-- [cuda][vis-coral-gps] `coral_gps.py` | a script to create a gps map of the coral coverage based on model predictions (based on the number of coral patches in an image)
-- [vis-onnx-gps] `infer_onnx_save_gps.py` | a script that takes an onnx model and performs inference on a folder of images, resulting in a gps track of the model decisions. If there are associated labels for the images i.e. the images are saved in deploy/no-deploy directories, then it will also create a ground truth gps track for comparison
+- **[cuda][vis-coral-gps]** `coral_gps.py` | a script to create a gps map of the coral coverage based on model predictions (based on the number of coral patches in an image)
+- **[vis-onnx-gps]** `infer_onnx_save_gps.py` | a script that takes an onnx model and performs inference on a folder of images, resulting in a gps track of the model decisions. If there are associated labels for the images i.e. the images are saved in deploy/no-deploy directories, then it will also create a ground truth gps track for comparison
 
 ### 6. Jetson Inference Files
 
@@ -117,7 +120,7 @@ utils/
 
 - [] `create_video_from_frames.py` | creates a .mp4 video from a folder containing sequential image frames
 - [] `randomise_and_recover_images.py` | this script has functions which can rename a folder of images such that they are randomised, and then name them back to their original filenames
-- [calc-obs-var] `calculate_observer_variability.py` | given two folders, each containing sub-directories for the labels for images, this will calculate the agreement between the two label sets
+- **[calc-obs-var]** `calculate_observer_variability.py` | given two folders, each containing sub-directories for the labels for images, this will calculate the agreement between the two label sets
 - [] `create_patches_from_images.py` | a script that takes whole images and creates a grid of x by y, saving each grid cell as a patch
 - [] `create_patches_from_images_noclasses.py` | a script that takes whole images and creates a grid of x by y, saving each grid cell as a patch; but when the images are not labelled
 
