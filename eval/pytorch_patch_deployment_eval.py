@@ -43,7 +43,7 @@ def cropper(images, width, height):
 if __name__=="__main__":
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
-    model_path = "models/pytorch/model-1745379497CKPT.pt"
+    model_path = "outputs/models/pytorch/model-1745448701CKPT.pt"
     model_load = models.mobilenet_v3_small(weights="MobileNet_V3_Small_Weights.DEFAULT")
 
     # Get the number of features in the last layer
@@ -61,6 +61,7 @@ if __name__=="__main__":
     model_load.eval()
 
     input_folder = '../CleanData/Evaluation/Deployment/Combined'
+    # input_folder = '../Rosbag-images'
 
     # Class names (folders) in your dataset
     class_names = ['No-Deploy','Deploy'] 
@@ -118,12 +119,14 @@ if __name__=="__main__":
                 soft_batch = torch.nn.Softmax(dim=1)
                 outputs_batch_soft =  soft_batch(outputs_batch)
                 outputs_batch_preds = torch.argmax(outputs_batch_soft, dim=1).int()
+
+            # print(outputs_batch_preds)
             
             # Compute ratio
             zero_count = (outputs_batch_preds == 2).sum(dim=0) # 2 corresponds with Deploy class for patch classifier
             ratio = zero_count / outputs_batch_preds.shape[0]
 
-            threshold = 0.7 # tunable hyperparameter
+            threshold = 0.5 # tunable hyperparameter
             deploy = (ratio > threshold).int()
 
             preds_torch = torch.tensor([deploy]).int().to(device)

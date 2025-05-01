@@ -31,9 +31,10 @@ if __name__ == '__main__':
     # wandb.init(mode="disabled")
     wandb.init(project="DGS-April", entity="sgraine")
 
-    dataset_path = "../CleanData/Training - CLIPPatchLabelling/Combined"
+    # dataset_path = "../CleanData/Training - CLIPPatchLabelling/Combined"
     # dataset_path = "../CleanData/Training - ChatGPTLabelling/PatchTrainSplit"
     # dataset_path = "../CleanData/Evaluation/Patches/Combined-TrainSplit" 
+    dataset_path = "../CleanData/Evaluation/Patches/Combined-Heron" 
     wandb.config.dataset = dataset_path
     class_list = ["No-Deploy","Coral","Deploy"]
 
@@ -64,9 +65,17 @@ if __name__ == '__main__':
     ###### Mobilenet_v3_large #####
     # model = mobilenet_v3_large(weights="MobileNet_V3_Large_Weights.DEFAULT")
     # wandb.config.model_type = 'MobileNet_V3-LARGE'
-    # model.classifier[3] = nn.Linear(in_features=1280, out_features=len(class_list))
+
+    # # Get the number of features in the last layer
+    # num_ftrs = model.classifier[3].in_features
+
+    # # Replace the last layer (classifier) with a new one for 4 classes
+    # model.classifier[3] = nn.Sequential(nn.Linear(num_ftrs, 512),
+    #                              nn.ReLU(),
+    #                              nn.Dropout(0.15),
+    #                              nn.Linear(512, len(class_list)))
     
-    # # ###### Resnet-18 #####
+    # ###### Resnet-18 #####
     # model = resnet18(pretrained=True)
     # wandb.config.model_type = 'resnet18'
     # model.fc = nn.Sequential(nn.Linear(512, 512),
@@ -104,12 +113,20 @@ if __name__ == '__main__':
     # criterion = nn.CrossEntropyLoss(weight=class_weights)
 
     ### Weighting for Focal Loss ###
-    # class_counts = np.array([37906,26200,24755])
-    # num_classes = 3
-    # total_samples = 88861
+    # Count the number of files in each class directory
+    class_counts = np.array([
+        len([
+            fname for fname in os.listdir(os.path.join(dataset_path, class_name))
+            if os.path.isfile(os.path.join(dataset_path, class_name, fname))
+        ])
+        for class_name in class_list
+    ])
 
-    class_counts = np.array([5460,1508,2046])
-    total_samples = 9014
+    # Total number of samples
+    total_samples = class_counts.sum()
+
+    print("Class counts:", class_counts)
+    print("Total samples:", total_samples)
 
     class_weights = []
     for count in class_counts:

@@ -70,9 +70,21 @@ if __name__ == '__main__':
     for param in model.parameters():
         param.requires_grad = True
 
-    #%%% Focal Loss %%%
-    class_counts = np.array([2194,1041])
-    total_samples = 3235
+    ### Weighting for Focal Loss ###
+    # Count the number of files in each class directory
+    class_counts = np.array([
+        len([
+            fname for fname in os.listdir(os.path.join(dataset_path, class_name))
+            if os.path.isfile(os.path.join(dataset_path, class_name, fname))
+        ])
+        for class_name in class_list
+    ])
+
+    # Total number of samples
+    total_samples = class_counts.sum()
+
+    print("Class counts:", class_counts)
+    print("Total samples:", total_samples)
 
     class_weights = []
     for count in class_counts:

@@ -96,7 +96,7 @@ def cropper(images, width, height):
 if __name__=="__main__":
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
-    model_path = "models/model-1745301988CKPT.pt"
+    model_path = "outputs/models/pytorch/model-1745448701CKPT.pt"
 
     model_load = models.mobilenet_v3_small(weights="MobileNet_V3_Small_Weights.DEFAULT")
 

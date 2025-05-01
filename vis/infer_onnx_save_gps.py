@@ -148,7 +148,7 @@ def perform_inference(image_path):
 
 if __name__ == '__main__':
     # Load the ONNX model
-    onnx_model_path = "models/onnx/Feb-model-mobilenet-28-3-256-256.onnx"
+    onnx_model_path = "outputs/models/onnx/Mobilenet-28-3-256-256.onnx"
     ort_session = ort.InferenceSession(onnx_model_path)
 
     INPUT_FOLDER = '../CleanData/Evaluation/Deployment/Combined'

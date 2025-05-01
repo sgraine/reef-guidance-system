@@ -52,6 +52,7 @@ folium = "*"
 tiktoken = "*"
 openai = "*"
 onnx = "*"
+torchinfo = "*"
 
 [feature.cuda.dependencies]
 cuda-version = "12.*"
@@ -79,15 +80,17 @@ cuda = ["cuda"]
 
 [tasks]
 chatgpt-label = { cmd = "python chatgpt/pseudolabel_and_eval.py" }
-train = { cmd = "python training/train_models_patchlabels.py" }
+train-patches = { cmd = "python training/train_models_patchlabels.py" }
 train-images = { cmd = "python training/train_models_imagelabels.py" }
-convert-onnx = { cmd = "python training/convert_onnx.py" }
+convert-onnx = { cmd = "python training/convert_onnx_2.py" }
 eval-patches = { cmd = "python eval/pytorch_patch_eval.py" }
 eval-deploy = { cmd = "python eval/pytorch_patch_deployment_eval.py" }
 eval-images = { cmd = "python eval/pytorch_image_eval.py" }
+eval-onnx = {cmd = "python eval/test_onnx_models.py" }
+eval-onnx-2 = {cmd = "python eval/test_onnx_models_2.py" }
 vis-onnx-gps = { cmd = "python vis/infer_onnx_save_gps.py" }
 vis-coral-gps = { cmd = "python vis/coral_gps.py" }
 calc-obs-var = { cmd = "python utils/calculate_observer_variability.py" }
-
-
+patch-debug = { cmd = "python training/compare_preprocessing.py frame_000000.png"}
+extract-features = { cmd = "python utils/feature_extraction.py"} 
 
