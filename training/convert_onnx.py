@@ -60,7 +60,7 @@ if __name__ == '__main__':
     #                              nn.Linear(512, 3))
 
     ##### MOBILENET MODEL #####
-    model_path = "models/pytorch/model-1745379497CKPT.pt"
+    model_path = "outputs/models/pytorch/model-1745448701CKPT.pt"
     model_load = models.mobilenet_v3_small(weights="MobileNet_V3_Small_Weights.DEFAULT")
 
     # Get the number of features in the last layer
@@ -88,7 +88,7 @@ if __name__ == '__main__':
     torch.onnx.export(
         modified_model,            # The model to export
         input_tensor,              # An example input tensor
-        "outputs/models/onnx/Mobilenet-28-3-256-256.onnx",              # The file path where the model will be saved
+        "outputs/models/onnx/Mobilenet-28-3-256-256.onnx",    # The file path where the model will be saved
         export_params=True,        # Store the trained parameter weights inside the model file
         opset_version=11,          # ONNX opset version (adjust if needed)
         do_constant_folding=True,  # Whether to execute constant folding for optimization

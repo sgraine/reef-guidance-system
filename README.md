@@ -58,10 +58,11 @@ chatgpt/
 training/
 ├── train_models_patchlabels.py   
 ├── train_models_imagelabels.py   
-├── convert_onnx.py               
+├── convert_onnx.py
+├── convert_onnx_whole_images.py             
 ```
 
-- **[cuda][train]** `train_models_patchlabels.py` | script to train a classification model on a dataset labelled at the patch level
+- **[cuda][train-patches]** `train_models_patchlabels.py` | script to train a classification model on a dataset labelled at the patch level
 - **[cuda][train-image]** `train_models_imagelabels.py` | script to train a classification model on a dataset labelled at the image level
 - **[cuda][convert-onnx]** `convert_onnx.py` | this script converts a pytorch model into an onnx model, useful for inference on a jetson
 
@@ -80,25 +81,29 @@ dataloaders/
 
 ```
 eval/
-├── pytorch_patch_deployment_eval.py   
-├── pytorch_patch_eval.py              
-├── pytorch_image_eval.py              
+├── pytorch_patch_deployment_eval.py
+├── pytorch_patch_eval.py
+├── pytorch_image_eval.py
+├── test_onnx_models.py
 ```
 
 - **[cuda][eval-deploy]** `pytorch_patch_deployment_eval.py` | evaluates a pytorch model on the whole image deployment task (classifies each patch first, then decides deploy/no-deploy using threshold
 - **[cuda][eval-patches]** `pytorch_patch_eval.py` | evaluates a pytorch model on a test patch dataset (where every patch has been assigned a ground truth label)
 - **[cuda][eval-images]** `pytorch_image_eval.py` | evaluates a pytorch model trained on whole images
+- **[eval-onnx]** `test_onnx_models.py` | checks outputs of onnx models
 
 ### 5. Visualisation
 
 ```
 vis/
 ├── coral_gps.py                  
-├── infer_onnx_save_gps.py        
+├── infer_onnx_save_gps.py 
+├── visualise_labels_with_gps.py         
 ```
 
-- **[cuda][vis-coral-gps]** `coral_gps.py` | a script to create a gps map of the coral coverage based on model predictions (based on the number of coral patches in an image)
-- **[vis-onnx-gps]** `infer_onnx_save_gps.py` | a script that takes an onnx model and performs inference on a folder of images, resulting in a gps track of the model decisions. If there are associated labels for the images i.e. the images are saved in deploy/no-deploy directories, then it will also create a ground truth gps track for comparison
+- **[cuda][vis-coral-gps]** `coral_gps.py` | a script to create a gps map of the coral coverage based on model predictions (based on the number of coral patches in an image): note this script uses the pytorch model
+- **[vis-onnx-gps]** `infer_onnx_save_gps.py` | a script that simulates the deployment scenario - it takes an onnx model and performs inference on a folder of images, resulting in a gps track of the model decisions. If there are associated labels for the images i.e. the images are saved in deploy/no-deploy directories, then it will also create a ground truth gps track for comparison
+- **[vis-gt-gps]** `visualise_labels_with_gps.py` | a script that visualises the labels for a set of images, without any model inference
 
 ### 6. Jetson Inference Files
 
@@ -116,6 +121,7 @@ utils/
 ├── calculate_observer_variability.py       
 ├── create_patches_from_images.py           
 ├── create_patches_from_images_noclasses.py 
+├── feature_extraction.py 
 ```
 
 - [] `create_video_from_frames.py` | creates a .mp4 video from a folder containing sequential image frames
@@ -123,6 +129,7 @@ utils/
 - **[calc-obs-var]** `calculate_observer_variability.py` | given two folders, each containing sub-directories for the labels for images, this will calculate the agreement between the two label sets
 - [] `create_patches_from_images.py` | a script that takes whole images and creates a grid of x by y, saving each grid cell as a patch
 - [] `create_patches_from_images_noclasses.py` | a script that takes whole images and creates a grid of x by y, saving each grid cell as a patch; but when the images are not labelled
+- **[cuda][extract-features]** `feature_extraction.py` | a script that takes a trained model and uses it as a feature extractor, can be used to extract features at different layers of the model
 
 ---
 
@@ -132,14 +139,22 @@ utils/
 outputs/
 └── models/
     ├── pytorch/
-    │   ├── ecologist_model.pt
-    │   ├── chatgpt_model.pt
+    │   ├── model-1746052531CKPT.pt
+    │   ├── model-1745448829CKPT.pt etc
     └── onnx/
-        └── best_model.onnx
+        └── ....onnx
 ```
 
-- Model trained on ecologist patches
-- Model trained on ChatGPT patches
+**Models:**
+
+- Mobilenet-small trained on ecologist patches: model-1745448701CKPT.pt
+- Mobilenet-small trained on ecologist patches at Heron Island and the combined set: model-1746052531CKPT.pt
+- Mobilenet-small trained on ChatGPT patches: model-1745448890CKPT.pt
+- Mobilenet-small trained on CLIP patches: model-1745448829CKPT.pt
+- Resnet-18 trained on ecologist patches: model-1745449254CKPT.pt
+- Efficientnet-B0 trained on ecologist patches: model-1745449304CKPT.pt
+- Mobilenet-large trained on ecologist patches: model-1745449205CKPT.pt
+
 
 ---
 
