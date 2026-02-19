@@ -66,7 +66,7 @@ class VLMGPT:
 	def __init__(self):	
 
 		global system_prompt
-		self.client = OpenAI(api_key="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")  #"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"
+		self.client = OpenAI(api_key="")
 		self.prompt = system_prompt
 		print("prompt", self.prompt)
 
@@ -141,5 +141,6 @@ class VLMGPT:
 	def _count_tokens(self, model="gpt-4o"):
 		enc = tiktoken.encoding_for_model(model)
 		return len(enc.encode(self.prompt))
+
 
 
