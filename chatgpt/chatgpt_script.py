@@ -66,7 +66,7 @@ class VLMGPT:
 	def __init__(self):	
 
 		global system_prompt
-		self.client = OpenAI(api_key="")
+		self.client = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
 		self.prompt = system_prompt
 		print("prompt", self.prompt)
 
@@ -75,21 +75,14 @@ class VLMGPT:
 	
 	def action(self, image_path: str):  
 		try:
-			# num_tokens = self._count_tokens()
-			# print(num_tokens)
 
 			response = self.client.chat.completions.create(
 					   model="gpt-4o", 
                        messages=[   self._text2msg(role="system", text=self.prompt),
 						            self._img2msg(role="user", image_path=image_path) ])
 			
-			# num_tokens = response.usage.prompt_tokens #response.usage.total_tokens #
-			# print("input tokens:", num_tokens)
-			# out_tokens = response.usage.completion_tokens #response.usage.total_tokens #
-			# print("output tokens:", out_tokens)
-			
 			vlm_answer_str = response.choices[0].message.content
-			return self._msg2dict(vlm_answer_str) #self._msg2int(vlm_answer_str) 
+			return self._msg2dict(vlm_answer_str)
 			
 		except Exception as e: 
 			print(f"An error occurred: {str(e)}")
@@ -109,7 +102,7 @@ class VLMGPT:
                 {
                     "type": "image_url",
                     "image_url": {"url": f"data:image/png;base64,{self._encodeImageForOpenAI(image_path)}","detail": "low"}
-                }  # Image
+                }
             ]
         }
 				

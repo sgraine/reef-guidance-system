@@ -1,5 +1,6 @@
 # Import packages
 import os, sys
+import argparse
 import numpy as np
 import torch
 from tqdm import tqdm
@@ -10,8 +11,13 @@ from PIL import Image
 from chatgpt.chatgpt_script import VLMGPT
 
 vlm = VLMGPT()
-
 print("Chatgpt setup successfully.")
+
+def parse_arguments():
+    parser = argparse.ArgumentParser(description='Creating Pseudo-Labels using GPT')
+    parser.add_argument('--dataset', type=str, required=True, help='Path to the dataset to label')
+    parser.add_argument('--output', type=str, required=True, help='Path to the output file for pseudo-labels and metrics')
+    return parser.parse_args()
 
 def classify_image(image_path):
     response = vlm.action(image_path)
@@ -66,9 +72,13 @@ class PatchDataset(Dataset):
 
 if __name__ == '__main__':
 
+    args = parse_arguments()
+    dataset_path = args.dataset  # e.g., "../CleanData/Evaluation/Patches/Combined-TestSplit", "../CleanData/Evaluation/Patches/Combined-TrainSplit"
+    output_path = args.output  # e.g., "outputs/pseudo-label-outputs.txt"
+
     class_list = ["No-Deploy","Coral","Deploy"]
 
-    test_dataloader = loadSetOrig(class_list, "../CleanData/Evaluation/Patches/Combined-TrainSplit", batch_size=1, num_workers=1)  # "../CleanData/Evaluation/Patches/Combined-TestSplit"
+    test_dataloader = loadSetOrig(class_list, dataset_path, batch_size=1, num_workers=1)
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
    
@@ -95,7 +105,7 @@ if __name__ == '__main__':
     step = 0
     error_list = []
 
-    with open("outputs/pseudo-label-outputs.txt", "w") as f:
+    with open(output_path, "w") as f:
         sys.stdout = f  # Redirect print output to file
 
         print("Iterating through the test dataset...")
