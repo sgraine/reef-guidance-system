@@ -1,5 +1,5 @@
-print("Importing packages...")
 import os
+import argparse
 from PIL import Image
 from tqdm import tqdm
 from PIL.ExifTags import TAGS, GPSTAGS
@@ -8,7 +8,12 @@ from shapely.geometry import Point
 import pandas as pd
 import folium
 
-print("Necessary packages imported.")
+def parse_arguments():
+    parser = argparse.ArgumentParser(description='Process GPS results.')
+    parser.add_argument('--ecologist', type=str, required=True, help='Name of the ecologist/experiment')
+    parser.add_argument('--dataset_root_path', type=str, required=True, help='Base path to the dataset')
+    parser.add_argument('--transect_list', type=str, nargs='+', required=True, help='List of transects')
+    return parser.parse_args()
 
 # Extract GPS info from image
 def get_gps_info(image_path):
@@ -37,19 +42,19 @@ def get_lat_lon(gps_info):
     return lat, lon
 
 if __name__ == '__main__':
-    ecologist = 'Sophie'
+    args = parse_arguments()
+    ecologist = args.ecologist # e.g., "Oli", "Sophie", "Mitch"
 
-    start_path = '../CleanData/Inter- and Intra- Observer Experiments/'+ecologist+'/Random'
+    start_path = args.dataset_root_path 
     class_names = ['No-Deploy','Deploy']
 
     # Determine the number of sequences:
-    sequence_list = os.listdir(start_path)
-    print(sequence_list)
+    transect_list = args.transect_list # e.g., ["Transect_1", "Transect_2", "Transect_3", "Transect_4", "Transect_5"]
     
     gps_results = []
-    for sequence in sequence_list:
+    for transect in transect_list:
 
-        INPUT_FOLDER = os.path.join(start_path, sequence)
+        INPUT_FOLDER = os.path.join(start_path, transect)
 
         # Get list of items in the directory
         contents = os.listdir(INPUT_FOLDER)
@@ -60,12 +65,8 @@ if __name__ == '__main__':
         for class_num in range(0,2):
             
             class_name = class_names[class_num]
-            print(f"Processing folder: ",class_name)
             current_path = os.path.join(INPUT_FOLDER, class_name)
-
             all_images = [i for i in os.listdir(current_path)]
-
-            print("Processing images...")
             for filename in tqdm(all_images):       
                 # Get GPS coordinates
                 gps_info = get_gps_info(os.path.join(current_path, filename))
@@ -104,5 +105,3 @@ if __name__ == '__main__':
     # Save the map to an HTML file or display it
     m.save("outputs/maps/"+ecologist+"_inferences.html")
     print("HTML file for ecologist labels saved.") 
-
-    print("Script end.")

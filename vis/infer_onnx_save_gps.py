@@ -1,8 +1,8 @@
-print("Importing packages...")
 import onnxruntime as ort
 import numpy as np
 import cv2
 import os
+import argparse
 from PIL import Image
 from tqdm import tqdm
 from PIL.ExifTags import TAGS, GPSTAGS
@@ -11,7 +11,12 @@ from shapely.geometry import Point
 import pandas as pd
 import folium
 
-print("Necessary packages imported.")
+def parse_arguments():
+    parser = argparse.ArgumentParser(description='Inference ONNX and create GPS maps.')
+    parser.add_argument('--model', type=str, required=True, help='Name of the model/experiment')
+    parser.add_argument('--weights', type=str, required=True, help='Path to the ONNX model weights')
+    parser.add_argument('--dataset', type=str, required=True, help='Path to the dataset for inference')
+    return parser.parse_args()
 
 def img_to_grid(img, row, col):
     ww = [[i.min(), i.max()] for i in np.array_split(range(img.shape[0]),row)]
@@ -148,10 +153,13 @@ def perform_inference(image_path):
 
 if __name__ == '__main__':
     # Load the ONNX model
-    onnx_model_path = "outputs/models/onnx/Mobilenet-28-3-256-256.onnx"
+    args = parse_arguments()
+    model = args.model
+    onnx_model_path = args.weights # e.g. "outputs/models/onnx/Mobilenet-28-3-256-256.onnx"
     ort_session = ort.InferenceSession(onnx_model_path)
-
-    INPUT_FOLDER = '../CleanData/Evaluation/Deployment/Combined'
+    INPUT_FOLDER = args.dataset  # e.g. '../CleanData/Evaluation/Deployment/Combined'
+    
+    
     class_names = ['No-Deploy','Deploy']
 
     # Get list of items in the directory
@@ -208,7 +216,7 @@ if __name__ == '__main__':
             ).add_to(m)
 
         # Save the map to an HTML file or display it
-        m.save("outputs/maps/html_file_inferences.html")
+        m.save(f"outputs/maps/html_{model}_inferences.html")
         print("HTML file for model inferences saved.")
 
     ################### If you have a folder containing subdirectories for Deploy/No-Deploy #########################
@@ -300,4 +308,4 @@ if __name__ == '__main__':
     else:
         print("Directory does not match expected configurations.")    
 
-    print("Script end.")
+    return

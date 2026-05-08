@@ -1,4 +1,5 @@
 import os
+import argparse
 from PIL import Image
 import numpy as np
 import pandas as pd
@@ -22,7 +23,13 @@ from shapely.geometry import Point
 import pandas as pd
 import folium
 
-print("Imports done")
+def parse_arguments():
+    parser = argparse.ArgumentParser(description='Inference PYTORCH and create GPS maps.')
+    parser.add_argument('--model', type=str, default="mobilenet", help='Name of the model/experiment')
+    parser.add_argument('--weights', type=str, required=True, help='Path to the PYTORCH model weights')
+    parser.add_argument('--dataset', type=str, required=True, help='Path to the dataset for inference')
+    return parser.parse_args()
+
 
 def get_color(value):
     cmap = cm.get_cmap("spring")  # Use the "spring" colormap
@@ -96,7 +103,9 @@ def cropper(images, width, height):
 if __name__=="__main__":
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
-    model_path = "outputs/models/pytorch/model-1745448701CKPT.pt"
+    args = parse_arguments()
+    model = args.model  # e.g., "mobilenet"
+    model_path = args.weights  # e.g., "outputs/models/pytorch/model-1745448701CKPT.pt"
 
     model_load = models.mobilenet_v3_small(weights="MobileNet_V3_Small_Weights.DEFAULT")
 
@@ -117,7 +126,7 @@ if __name__=="__main__":
     # Class names (folders) in your dataset
     class_names = ['No-Deploy','Deploy']  # Replace with your actual class names
 
-    input_folder = '../CleanData/Evaluation/Deployment/Combined'
+    input_folder = args.dataset  # e.g., '../CleanData/Evaluation/Deployment/Combined'
 
     label_dict = {}
     inference_dict = {} 
@@ -208,4 +217,4 @@ if __name__=="__main__":
         ).add_to(m)
 
     # Save the map to an HTML file or display it
-    m.save("outputs/maps/coral-map.html")
+    m.save(f"outputs/maps/coral-map_{model}.html")
