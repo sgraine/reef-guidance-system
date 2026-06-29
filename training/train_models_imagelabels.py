@@ -10,6 +10,7 @@ from tqdm import tqdm
 import wandb
 import torchmetrics
 import numpy as np
+import argparse
 
 class FocalLoss(nn.Module):
     def __init__(self, alpha=None, gamma=2):
@@ -23,13 +24,20 @@ class FocalLoss(nn.Module):
         loss = (self.alpha[targets] * (1 - pt) ** self.gamma * ce_loss).mean()
         return loss
 
-if __name__ == '__main__':
-    device = 'cuda' if torch.cuda.is_available() else 'cpu'
+def parse_arguments():
+    parser = argparse.ArgumentParser(description='Train image classification model at image level.')
+    parser.add_argument('--dataset_path', type=str, required=True, help='Path to the dataset folder')
+    parser.add_argument('--output_path', type=str, required=True, help='Path to the output folder')
+    parser.add_argument('--model_name', type=str, required=True, help='Name of the model to be saved')
+    return parser.parse_args()
 
-    # wandb.init(mode="disabled")
+if __name__ == '__main__':
+    args = parse_arguments()
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
     wandb.init(project="DGS-Whole-Image-April", entity="sgraine")
 
-    dataset_path = "../CleanData/Training - ImageWeakLabelling/Combined" 
+    dataset_path = args.dataset_path
     wandb.config.dataset = dataset_path
     class_list = ["No-Deploy","Coral","Deploy"]
 
@@ -124,7 +132,7 @@ if __name__ == '__main__':
     dataloaders['train'] = train_dataloader
     dataloaders['val'] = val_dataloader
 
-    model_name = f"model-{int(time.time())}"
+    model_name = args.model_name
     print("################################# MODEL NAME: ########################################")
     print(model_name)
     wandb.config.model_name = model_name
@@ -242,11 +250,11 @@ if __name__ == '__main__':
 
         if acc_val > best_acc:
             best_acc = acc_val
-            torch.save(model.state_dict(), "outputs/models/pytorch/"+str(model_name)+'CKPT.pt')
+            torch.save(model.state_dict(), os.path.join(args.output_path, f"{model_name}_acc.pt"))
 
         if val_loss < min_loss:
             min_loss = val_loss
-            torch.save(model.state_dict(), "outputs/models/pytorch/"+str(model_name)+'_loss_CKPT.pt')
+            torch.save(model.state_dict(), os.path.join(args.output_path, f"{model_name}_loss.pt"))
 
         acc_metric_train.reset()
         per_class_prec_metric_train.reset()
@@ -261,4 +269,4 @@ if __name__ == '__main__':
         wandb.log(metrics, step=epoch)
 
     # Save the final model weights
-    torch.save(model.state_dict(), "outputs/models/pytorch/"+str(model_name)+'_FINAL.pt')
+    torch.save(model.state_dict(), os.path.join(args.output_path, f"{model_name}_last.pt"))

@@ -4,6 +4,7 @@ import torchvision.models as models
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+import argparse
 
 class ModifiedModel(nn.Module):
     def __init__(self, base_model, deploy_threshold=0.6):
@@ -31,9 +32,15 @@ class ModifiedModel(nn.Module):
         
         return preds, ratio, deploy # Return the additional values
 
+def parse_arguments():
+    parser = argparse.ArgumentParser(description='Process GPS results.')
+    parser.add_argument('--torch_model', type=str, required=True, help='Path to the PyTorch model file')
+    parser.add_argument('--onnx_model', type=str, required=True, help='Path to the output ONNX model file')
+
 
 if __name__ == '__main__':
-    device = 'cuda' if torch.cuda.is_available() else 'cpu'
+    args = parse_arguments()
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
     # ###### Resnet-18 #####
     # model_path = "model-1739752833CKPT.pt"
@@ -60,7 +67,7 @@ if __name__ == '__main__':
     #                              nn.Linear(512, 3))
 
     ##### MOBILENET MODEL #####
-    model_path = "outputs/models/pytorch/model-1745448701CKPT.pt"
+    model_path = args.torch_model
     model_load = models.mobilenet_v3_small(weights="MobileNet_V3_Small_Weights.DEFAULT")
 
     # Get the number of features in the last layer
@@ -88,7 +95,7 @@ if __name__ == '__main__':
     torch.onnx.export(
         modified_model,            # The model to export
         input_tensor,              # An example input tensor
-        "outputs/models/onnx/Mobilenet-28-3-256-256.onnx",    # The file path where the model will be saved
+        args.onnx_model,           # The file path where the model will be saved
         export_params=True,        # Store the trained parameter weights inside the model file
         opset_version=11,          # ONNX opset version (adjust if needed)
         do_constant_folding=True,  # Whether to execute constant folding for optimization

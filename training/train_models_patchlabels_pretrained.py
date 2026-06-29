@@ -7,6 +7,8 @@ ROOT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 if ROOT_DIR not in sys.path:
     sys.path.insert(0, ROOT_DIR)
 
+import argparse
+
 from torchvision.models import mobilenet_v3_small, mobilenet_v3_large, resnet18, efficientnet_b0
 import torch
 import torch.nn as nn
@@ -33,27 +35,30 @@ class FocalLoss(nn.Module):
         return loss
 
 def parse_arguments():
-    parser = argparse.ArgumentParser(description='Train image classification model at image level.')
+    parser = argparse.ArgumentParser(description='Train image classification model with pretrained weights.')
     parser.add_argument('--dataset_path', type=str, required=True, help='Path to the dataset folder')
     parser.add_argument('--output_path', type=str, required=True, help='Path to the output folder')
+    parser.add_argument('--pretrained_weights', type=str, required=True, help='Path to the pretrained weights file')
     parser.add_argument('--model_name', type=str, required=True, help='Name of the model to be saved')
     return parser.parse_args()
 
 if __name__ == '__main__':
     args = parse_arguments()
-    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-    
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
     model_name = args.model_name
     wandb.init(project="DGS", notes=model_name)
+
     dataset_path = args.dataset_path
-    
+    init_weights = args.pretrained_weights
+
     wandb.config.dataset = dataset_path
     class_list = ["No-Deploy","Coral","Deploy"]
 
     epochs = 200
-    learning_rate = 0.001 
-    batch_size = 512 
-    #batch_size = 96 
+    learning_rate = 0.0001 
+    #batch_size = 512 
+    batch_size = 96 
     augment = True
 
     wandb.config.batch_size = batch_size
@@ -72,6 +77,8 @@ if __name__ == '__main__':
                                  nn.ReLU(),
                                  nn.Dropout(0.15),
                                  nn.Linear(512, len(class_list)))
+                        
+    model.load_state_dict(torch.load(init_weights, map_location=device))
 
     #%%%%%%%%%%%%%%%%%%% Alternate models %%%%%%%%%%%%%%%%%%%%%%%%%
 
