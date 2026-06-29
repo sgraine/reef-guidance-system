@@ -16,6 +16,7 @@ import torch
 import torch.nn as nn
 import imgaug.augmenters as iaa
 import torchmetrics
+import argparse
 
 print("Imports done")
 
@@ -53,11 +54,17 @@ def cropper(images, width, height):
 
     return seq.augment_image(images)
 
+def parse_arguments():
+    parser = argparse.ArgumentParser(description='Script for evaluating image classification model at image level.')
+    parser.add_argument('--dataset_path', type=str, required=True, help='Path to the dataset folder')
+    parser.add_argument('--model_weights', type=str, required=True, help='Path to the model weights file')
+    return parser.parse_args()
+
 if __name__=="__main__":
-    device = 'cuda' if torch.cuda.is_available() else 'cpu'
+    args = parse_arguments()
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
-    model_path = "models/pytorch/model-1745366065CKPT.pt"
-
+    model_path = args.model_weights
     model_load = models.mobilenet_v3_small(weights="MobileNet_V3_Small_Weights.DEFAULT")
 
     # Get the number of features in the last layer
@@ -77,7 +84,7 @@ if __name__=="__main__":
     # Class names (folders) in your dataset
     class_names = ['No-Deploy','Deploy']  # Replace with your actual class names
 
-    input_folder = '../CleanData/Evaluation/Deployment/Combined'
+    input_folder = args.dataset_path 
 
     ##### Accuracy Metrics #####
     acc_metric_test = torchmetrics.Accuracy(num_classes = len(class_names), task='multiclass', multidim_average='global').to(device)

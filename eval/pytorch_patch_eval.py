@@ -10,6 +10,7 @@ import torchmetrics
 import pandas as pd
 import wandb
 import sys
+import argparse
 
 print("Packages imported successfully.")
 
@@ -27,17 +28,26 @@ def normalize_logits(logits):
     normalized_logits = (logits - mean) / std
     return normalized_logits
 
+def parse_arguments():
+    parser = argparse.ArgumentParser(description='Script for evaluating image classification model at patch level.')
+    parser.add_argument('--dataset_path', type=str, required=True, help='Path to the dataset folder')
+    parser.add_argument('--model_name', type=str, required=True, help='Name of the model')
+    parser.add_argument('--model_weights', type=str, required=True, help='Path to the model weights file')
+    parser.add_argument('--output_path', type=str, required=True, help='Path to save the output results')
+    return parser.parse_args()
+
+
 if __name__ == '__main__':
-    device = 'cuda' if torch.cuda.is_available() else 'cpu'
-    wandb.init(project="DGS-Patch-Eval", entity="sgraine")
-    # wandb.init(mode="disabled")
+    args = parse_arguments()
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
     class_list = ["No-Deploy","Coral","Deploy"]
-
-    test_dataloader = loadTestSetOrig(class_list, "../CleanData/Evaluation/Patches/Combined-TestSplit", batch_size=12, num_workers=2)
+    test_dataloader = loadTestSetOrig(class_list, args.dataset_path, batch_size=48, num_workers=4)
    
-    model_name = "1745448890CKPT"
-    model_path = "outputs/models/pytorch/model-"+model_name+".pt" # mobilenet on ecologist patches
+    model_name = args.model_name
+    model_path = args.model_weights
+
+    wandb.init(project="DGS", notes=model_name)
     wandb.config.model_path = model_path
 
     ###### mobilenet_v3_small #####
@@ -165,7 +175,7 @@ if __name__ == '__main__':
     conf_mat = conf_matrix.compute()
     conf_mat_norm = conf_matrix_norm.compute()
 
-    with open("outputs/results/patch_results_"+model_name+".txt", "w") as f:
+    with open(os.path.join(args.output_path, f"{model_name}_results.txt"), "w") as f:
         sys.stdout = f  # Redirect print output to file
 
         print("Accuracy:", acc_test.item())

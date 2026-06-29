@@ -10,6 +10,7 @@ import torch
 import torch.nn as nn
 import imgaug.augmenters as iaa
 import torchmetrics
+import argparse
 
 print("Imports done")
 
@@ -40,10 +41,17 @@ def cropper(images, width, height):
 
     return seq.augment_image(images)
 
-if __name__=="__main__":
-    device = 'cuda' if torch.cuda.is_available() else 'cpu'
+def parse_arguments():
+    parser = argparse.ArgumentParser(description='Script for evaluating image classification model at patch level.')
+    parser.add_argument('--dataset_path', type=str, required=True, help='Path to the dataset folder')
+    parser.add_argument('--model_weights', type=str, required=True, help='Path to the model weights file')
+    return parser.parse_args()
 
-    model_path = "outputs/models/pytorch/model-1745448701CKPT.pt"
+if __name__=="__main__":
+    args = parse_arguments()
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
+    model_path = args.model_weights
     model_load = models.mobilenet_v3_small(weights="MobileNet_V3_Small_Weights.DEFAULT")
 
     # Get the number of features in the last layer
@@ -60,8 +68,7 @@ if __name__=="__main__":
     model_load = model_load.to(device)
     model_load.eval()
 
-    input_folder = '../CleanData/Evaluation/Deployment/Combined'
-    # input_folder = '../Rosbag-images'
+    input_folder = args.dataset_path
 
     # Class names (folders) in your dataset
     class_names = ['No-Deploy','Deploy'] 
@@ -126,7 +133,7 @@ if __name__=="__main__":
             zero_count = (outputs_batch_preds == 2).sum(dim=0) # 2 corresponds with Deploy class for patch classifier
             ratio = zero_count / outputs_batch_preds.shape[0]
 
-            threshold = 0.5 # tunable hyperparameter
+            threshold = 0.9 # tunable hyperparameter
             deploy = (ratio > threshold).int()
 
             preds_torch = torch.tensor([deploy]).int().to(device)
