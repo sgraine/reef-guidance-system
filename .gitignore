@@ -1,3 +1,5 @@
 wandb/
 dataloaders/__pycache__/
 outputs/
+*.pt
+*.png
