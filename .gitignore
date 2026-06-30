@@ -3,3 +3,4 @@ dataloaders/__pycache__/
 outputs/
 *.pt
 *.png
+*.pdf
