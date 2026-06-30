@@ -80,19 +80,32 @@ cuda = ["cuda"]
 
 [tasks]
 chatgpt-label = { cmd = "python chatgpt/pseudolabel_and_eval.py" }
+
 train-patches = { cmd = "python training/train_models_patchlabels.py" }
 train-images = { cmd = "python training/train_models_imagelabels.py" }
-convert-onnx = { cmd = "python training/convert_onnx.py" }
-eval-patches = { cmd = "python eval/pytorch_patch_eval.py" }
-eval-deploy = { cmd = "python eval/pytorch_patch_deployment_eval.py" }
-eval-images = { cmd = "python eval/pytorch_image_eval.py" }
-eval-onnx = {cmd = "python eval/test_onnx_models.py" }
-vis-onnx-gps = { cmd = "python vis/infer_onnx_save_gps.py" }
-vis-coral-gps = { cmd = "python vis/coral_gps.py" }
-calc-obs-var = { cmd = "python utils/calculate_observer_variability.py" }
-patch-debug = { cmd = "python training/compare_preprocessing.py frame_000000.png"}
-extract-features = { cmd = "python utils/feature_extraction.py"}
+train-mlp = { cmd = "python training/train_prediction_net.py" }
 train-patches-combined = { cmd = "python training/train_models_patchlabels_pretrained.py"} 
 train-cnn = { cmd = "python extras/train_prediction_net.py"} 
 train-cnn-mat = { cmd = "python extras/train_prediction_matrix.py"} 
 
+convert-onnx = { cmd = "python training/convert_onnx.py" }
+convert-onnx2 = { cmd = "python training/convert_onnx_2.py" }
+convert-onnx-mlp = { cmd = "python training/convert_onnx_mlp.py" }
+convert-onnx-images = { cmd = "python training/convert_onnx_imagelabels.py" }
+
+eval-patches = { cmd = "python eval/pytorch_patch_eval.py" }
+eval-deploy = { cmd = "python eval/pytorch_patch_deployment_eval.py" }
+eval-images = { cmd = "python eval/pytorch_image_eval.py" }
+eval-mlp = { cmd = "python eval/pytorch_mlp_deployment_eval.py" }
+eval-onnx = {cmd = "python eval/test_onnx_models.py" }
+eval-onnx2 = {cmd = "python eval/test_onnx_models.py" }
+
+vis-onnx-gps = { cmd = "python vis/infer_onnx_save_gps.py" }
+vis-coral-gps = { cmd = "python vis/coral_gps.py" }
+vis-gt-gps = { cmd = "python vis/visualise_labels_with_gps.py" }
+
+calc-obs-var = { cmd = "python utils/calculate_observer_variability.py" }
+patch-debug = { cmd = "python training/compare_preprocessing.py frame_000000.png"}
+extract-features = { cmd = "python utils/feature_extraction.py"}
+prec-rec = { cmd = "python vis/prec_rec_curves.py"}
+metadata = { cmd = "python utils/analyse_metadata.py"}
