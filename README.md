@@ -1,9 +1,47 @@
 # Reef Guidance System
+## AI-driven Dispensing of Coral Reseeding Devices for Broad-scale Restoration of the Great Barrier Reef
 
-## Summary
+The official repository for the paper: "AI-driven Dispensing of Coral Reseeding Devices for Broad-scale Restoration of the Great Barrier Reef", published in the IEEE/RSJ International Conference on Intelligent Robots and Systems.
 
-**Project:** Reef Guidance System AI  
-**Author:** Scarlett Raine ([sg.raine@qut.edu.au](mailto:sg.raine@qut.edu.au))
+**Authors:** Scarlett Raine ([sg.raine@qut.edu.au](mailto:sg.raine@qut.edu.au)), Emilio Olivastri, Benjamin Moshirian, Tobias Fischer
+
+If this repository contributes to your research, please consider citing the publication below.
+
+
+```
+Raine, S., Olivastri, E., Moshirian, B., & Fischer, T. (2026). AI-driven dispensing of coral reseeding devices for broad-scale restoration of the Great Barrier Reef. IEEE/RSJ International Conference on Intelligent Robots and Systems.
+```
+
+### Bibtex
+```
+@inproceedings{raine2026ai,
+title={AI-driven dispensing of coral reseeding devices for broad-scale restoration of the Great Barrier Reef},
+author={Raine, Scarlett and Olivastri, Emilio and Moshirian, Benjamin and Fischer, Tobias},
+booktitle={IEEE/RSJ International Conference on Intelligent Robots and Systems},
+year={2026},
+organization={IEEE}
+}
+
+```
+
+The full paper can be accessed at: \[[Paper](https://arxiv.org/abs/2509.01019)].
+
+## Table of Contents
+- [Dataset](#dataset)
+- [Setup](#setup)
+- [Scripts](#scripts)
+- [Acknowledgements](#acknowledgements)
+
+
+---
+
+## Dataset Access
+
+We make the data publicly available on [HuggingFace](https://huggingface.co/datasets/QCR-Underwater-Perception/reef-guidance-system).
+
+---
+
+## Setup
 
 These scripts are for the Reef Guidance System AI functionality and encompass all tasks from data pre-processing and pseudo-labelling, training models, data analysis and model evaluation, and visualisation of model outputs.
 
@@ -13,10 +51,6 @@ Main packages used:
 - **[Pixi](https://pixi.sh/latest/)** – for package management and running scripts
 - **PyTorch** – for training and evaluation
 - **ONNX** – for deployment on the Jetson
-
----
-
-## Pixi Setup
 
 This repo uses `pixi.toml` to define the environment and task runners.
 
@@ -169,3 +203,8 @@ outputs/
 - GPS tracks of all labelled sites (Amy)  
 - GPS tracks by other ecologists  
 - Coral coverage estimation maps
+
+
+## Acknowledgements
+
+S.R., E.O. and T.F. acknowledge continued support from the Queensland University of Technology (QUT) through the Centre for Robotics. T.F. acknowledges funding from an Australian Research Council (ARC) Discovery Early Career Researcher Award (DECRA) Fellowship DE240100149. All authors acknowledge support from the Reef Restoration and Adaptation Program (RRAP) which is funded by a partnership between the Australian Government’s Reef Trust and the Great Barrier Reef Foundation.
